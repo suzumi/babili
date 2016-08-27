@@ -23,11 +23,13 @@ describe("type-constructors-plugin", () => {
     expect(transform(source)).toBe(expected);
   });
 
-  it("should turn String(x) to x + ''", () => {
-    const source = "String(x);";
-    const expected = "x + \"\";";
-    expect(transform(source)).toBe(expected);
-  });
+  // Should NOT be done
+  // https://github.com/babel/babili/issues/112
+  // it("should turn String(x) to x + ''", () => {
+  //   const source = "String(x);";
+  //   const expected = "x + \"\";";
+  //   expect(transform(source)).toBe(expected);
+  // });
 
   it("should turn Array() to []", () => {
     const source = "Array();";

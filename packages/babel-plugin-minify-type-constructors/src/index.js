@@ -122,12 +122,14 @@ module.exports = function({ types: t }) {
         }
 
         // String(foo) -> foo + ''
-        if (t.isIdentifier(node.callee, { name: "String" }) &&
-          node.arguments.length === 1 &&
-          !path.scope.getBinding("String")) {
-          path.replaceWith(t.binaryExpression("+", node.arguments[0], t.stringLiteral("")));
-          return;
-        }
+        // Should NOT be done -
+        // https://github.com/babel/babili/issues/112
+        // if (t.isIdentifier(node.callee, { name: "String" }) &&
+        //   node.arguments.length === 1 &&
+        //   !path.scope.getBinding("String")) {
+        //   path.replaceWith(t.binaryExpression("+", node.arguments[0], t.stringLiteral("")));
+        //   return;
+        // }
 
         // Array() -> []
         if (replaceArray(t, path)) {
